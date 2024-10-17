@@ -722,7 +722,7 @@ if __name__ == '__main__':
         account_files.sort(key=lambda x: int(re.findall(r'\d+', x)[0]))
         
         tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╔═══════════════════════════════════════════╗{Style.RESET_ALL}")
-        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║       Select an option [Script By D4rkCipherX]       ║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║       Select an option [MADE BY SAVANOP]       ║{Style.RESET_ALL}")
         tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╠═══════════════════════════════════════════╣{Style.RESET_ALL}")
         tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 1 ] | Generate Tokens                    {Fore.MAGENTA}║{Style.RESET_ALL}")
         tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 2 ] | Use Existing accounts-*.json       {Fore.MAGENTA}║{Style.RESET_ALL}")
