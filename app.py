@@ -347,7 +347,7 @@ class Tomarket:
                         if 'status' in play_game:
                             if play_game['status'] == 0:
                                 self.print_timestamp(
-                                    f"{Fore.BLUE + Style.BRIGHT}[ Game Started ][Subscribe Here- https://www.youtube.com/@D4rkCipherX]{Style.RESET_ALL}"
+                                    f"{Fore.BLUE + Style.BRIGHT}[ Game Started ][Subscribe Here https://youtube.com/@savanksush6652?si=lSXsNs_pPLVSYHev]{Style.RESET_ALL}"
                                     f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
                                     f"{Fore.YELLOW + Style.BRIGHT}[ Please Wait ~30 Seconds ]{Style.RESET_ALL}"
                                 )
@@ -707,26 +707,38 @@ if __name__ == '__main__':
 
         tomarket = Tomarket()
 
+        banner = """
+███████  █████  ██    ██  █████  ███    ██ 
+██      ██   ██ ██    ██ ██   ██ ████   ██ 
+███████ ███████ ██    ██ ███████ ██ ██  ██ 
+     ██ ██   ██  ██  ██  ██   ██ ██  ██ ██ 
+███████ ██   ██   ████   ██   ██ ██   ████ 
+        """
+        print(Fore.CYAN + Style.BRIGHT + banner + Style.RESET_ALL)
+        
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}[ Join Our Channel: https://t.me/savanop121 ]{Style.RESET_ALL}")
+
         account_files = [f for f in os.listdir() if f.startswith('accounts-') and f.endswith('.json')]
         account_files.sort(key=lambda x: int(re.findall(r'\d+', x)[0]))
         
-        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}[ Select an option ][Script By D4rkCipherX]{Style.RESET_ALL}")
-        tomarket.print_timestamp(
-            f"{Fore.MAGENTA + Style.BRIGHT}[ 1 ]{Style.RESET_ALL}"
-            f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
-            f"{Fore.CYAN + Style.BRIGHT}[ Generate Tokens ]{Style.RESET_ALL}"
-        )
-        tomarket.print_timestamp(
-            f"{Fore.MAGENTA + Style.BRIGHT}[ 2 ]{Style.RESET_ALL}"
-            f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
-            f"{Fore.CYAN + Style.BRIGHT}[ Use Existing accounts-*.json ]{Style.RESET_ALL}"
-        )
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╔═══════════════════════════════════════════╗{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║       Select an option [Script By D4rkCipherX]       ║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╠═══════════════════════════════════════════╣{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 1 ] | Generate Tokens                    {Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 2 ] | Use Existing accounts-*.json       {Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 3 ] | Add Query                          {Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 4 ] | Reset Queries                      {Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ 5 ] | Reset Account JSON                 {Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╚═══════════════════════════════════════════╝{Style.RESET_ALL}")
 
         initial_choice = int(input(
             f"{Fore.CYAN + Style.BRIGHT}[ Enter The Number Corresponding To Your Choice ]{Style.RESET_ALL}"
             f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
         ))
         if initial_choice == 1:
+            secret_code = input(f"{Fore.CYAN + Style.BRIGHT}[ Enter Secret Code ]{Style.RESET_ALL} ")
+            if secret_code != "LOVEMYEX":
+                raise ValueError("Invalid Secret Code")
             tomarket.print_timestamp(f"{Fore.CYAN + Style.BRIGHT}[ Processing Queries to Generate Tokens ]{Style.RESET_ALL}")
             asyncio.run(tomarket.process_queries())
             tomarket.print_timestamp(f"{Fore.CYAN + Style.BRIGHT}[ Token Generation Completed ]{Style.RESET_ALL}")
@@ -739,16 +751,48 @@ if __name__ == '__main__':
         elif initial_choice == 2:
             if not account_files:
                 raise FileNotFoundError("No 'accounts-*.json' Files Found In The Directory. Please Generate Tokens First By Selecting Option 1.")
+        elif initial_choice == 3:
+            secret_code = input(f"{Fore.CYAN + Style.BRIGHT}[ Enter Secret Code ]{Style.RESET_ALL} ")
+            if secret_code != "HTERSFCK":
+                raise ValueError("Invalid Secret Code")
+            query = input(f"{Fore.CYAN + Style.BRIGHT}[ Enter Your Query ]{Style.RESET_ALL} ")
+            with open('queries.txt', 'a') as f:
+                f.write(query + '\n')
+            tomarket.print_timestamp(f"{Fore.GREEN + Style.BRIGHT}[ Query Added Successfully ]{Style.RESET_ALL}")
+            sys.exit(0)
+        elif initial_choice == 4:
+            open('queries.txt', 'w').close()
+            tomarket.print_timestamp(f"{Fore.GREEN + Style.BRIGHT}[ Queries Reset Successfully ]{Style.RESET_ALL}")
+            sys.exit(0)
+        elif initial_choice == 5:
+            tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╔═══════════════════════════════════════════╗{Style.RESET_ALL}")
+            tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║       Select The Account File To Reset    ║{Style.RESET_ALL}")
+            tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╠═══════════════════════════════════════════╣{Style.RESET_ALL}")
+            for i, accounts_file in enumerate(account_files, start=1):
+                tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ {i} ] | {accounts_file:<30}{Fore.MAGENTA}║{Style.RESET_ALL}")
+            tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╚═══════════════════════════════════════════╝{Style.RESET_ALL}")
+
+            reset_choice = int(input(
+                f"{Fore.CYAN + Style.BRIGHT}[ Enter The Number Corresponding To The File You Want To Reset ]{Style.RESET_ALL}"
+                f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
+            )) - 1
+            if reset_choice < 0 or reset_choice >= len(account_files):
+                raise ValueError("Invalid Choice. Please Run The Script Again And Choose A Valid Option")
+
+            selected_reset_file = account_files[reset_choice]
+            with open(selected_reset_file, 'w') as f:
+                json.dump({"accounts": []}, f)
+            tomarket.print_timestamp(f"{Fore.GREEN + Style.BRIGHT}[ Account File {selected_reset_file} Reset Successfully ]{Style.RESET_ALL}")
+            sys.exit(0)
         else:
             raise ValueError("Invalid Initial Choice. Please Run The Script Again And Choose A Valid Option")
 
-        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}[ Select The Accounts File To Use ]{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╔═══════════════════════════════════════════╗{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║       Select The Accounts File To Use     ║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╠═══════════════════════════════════════════╣{Style.RESET_ALL}")
         for i, accounts_file in enumerate(account_files, start=1):
-            tomarket.print_timestamp(
-                f"{Fore.MAGENTA + Style.BRIGHT}[ {i} ]{Style.RESET_ALL}"
-                f"{Fore.WHITE + Style.BRIGHT} | {Style.RESET_ALL}"
-                f"{Fore.CYAN + Style.BRIGHT}[ {accounts_file} ]{Style.RESET_ALL}"
-            )
+            tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}║ {Fore.CYAN}[ {i} ] | {accounts_file:<30}{Fore.MAGENTA}║{Style.RESET_ALL}")
+        tomarket.print_timestamp(f"{Fore.MAGENTA + Style.BRIGHT}╚═══════════════════════════════════════════╝{Style.RESET_ALL}")
 
         choice = int(input(
             f"{Fore.CYAN + Style.BRIGHT}[ Enter The Number Corresponding To The File You Want To Use ]{Style.RESET_ALL}"
